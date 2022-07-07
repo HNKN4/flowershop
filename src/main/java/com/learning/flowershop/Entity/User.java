@@ -1,9 +1,12 @@
 package com.learning.flowershop.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Table(name = "users")
 public class User {
     @Id
@@ -12,13 +15,13 @@ public class User {
     private String login;
     private Integer money;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<Order> orders;
+    @JsonIgnore
+    private List<Order> orders;
 
     public User() {
     }
 
-    public User(Long id, String login, Integer money, Set<Order> orders) {
-        this.id = id;
+    public User(String login, Integer money, List<Order> orders) {
         this.login = login;
         this.money = money;
         this.orders = orders;
@@ -48,11 +51,11 @@ public class User {
         this.money = money;
     }
 
-    public Set<Order> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
 }

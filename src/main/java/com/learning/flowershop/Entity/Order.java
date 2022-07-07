@@ -2,7 +2,7 @@ package com.learning.flowershop.Entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -12,18 +12,16 @@ public class Order {
     private Long id;
     private LocalDate orderCreateDate;
     private LocalDate orderCompleteDate;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-    @OneToMany (cascade = CascadeType.ALL)
-    private Set<Flower> flower;
+    @ManyToMany
+    private List<Flower> flower;
     private Integer price;
 
     public Order() {
     }
 
-    public Order(Long id, LocalDate orderCreateDate, LocalDate orderCompleteDate, User user, Set<Flower> flower) {
-        this.id = id;
+    public Order(LocalDate orderCreateDate, LocalDate orderCompleteDate, User user, List<Flower> flower) {
         this.orderCreateDate = orderCreateDate;
         this.orderCompleteDate = orderCompleteDate;
         this.user = user;
@@ -62,11 +60,11 @@ public class Order {
         this.user = user;
     }
 
-    public Set<Flower> getFlower() {
+    public List<Flower> getFlower() {
         return flower;
     }
 
-    public void setFlower(Set<Flower> flower) {
+    public void setFlower(List<Flower> flower) {
         this.flower = flower;
     }
 

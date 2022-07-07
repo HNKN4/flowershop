@@ -4,7 +4,6 @@ import com.learning.flowershop.Entity.User;
 import com.learning.flowershop.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +17,8 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
-        return (List<User>) userRepository.findAll();
+        List<User> user = (List<User>) userRepository.findAll();
+        return user;
     }
 
     public void changeMoney(Long userId, Integer money) {

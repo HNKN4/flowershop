@@ -14,8 +14,7 @@ public class Flower {
     public Flower() {
     }
 
-    public Flower (Long id, String name, Integer price) {
-        this.id = id;
+    public Flower (String name, Integer price) {
         this.name = name;
         this.price = price;
     }
