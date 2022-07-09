@@ -31,4 +31,8 @@ public class UserService {
             throw new RuntimeException("user not found");
         }
     }
+
+    public User saveUser(User user) {
+        return userRepository.save(user);
+    }
 }
