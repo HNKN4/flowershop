@@ -20,6 +20,10 @@ public class OrderService {
         return orderRepository.findAllByUserId(userId);
     }
 
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
     @Transactional
     public void saveOrder(Order order) {
         orderRepository.save(order);

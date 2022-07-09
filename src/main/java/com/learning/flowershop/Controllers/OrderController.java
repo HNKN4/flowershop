@@ -17,9 +17,14 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/getAllOrders")
+    @GetMapping("/getAllOrdersByUser")
     protected List<Order> getAllOrdersByUser(@Param("userId") Long userId) {
         return orderService.getAllOrdersByUserId(userId);
+    }
+
+    @GetMapping("/getAllOrders")
+    protected List<Order> getAllOrders() {
+        return orderService.getAllOrders();
     }
 
     @PostMapping("/save")

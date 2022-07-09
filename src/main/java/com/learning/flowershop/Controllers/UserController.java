@@ -4,11 +4,10 @@ import com.learning.flowershop.Entity.User;
 import com.learning.flowershop.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
     private final UserService userService;
 
@@ -26,5 +25,10 @@ public class UserController {
     protected void changeMoney(@RequestParam("userId") Long userId,
                                @RequestParam("money") Integer money) {
         userService.changeMoney(userId, money);
+    }
+
+    @PostMapping("/save")
+    protected User saveUser(@RequestBody User user) {
+       return userService.saveUser(user);
     }
 }
