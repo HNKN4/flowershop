@@ -1,7 +1,7 @@
 package com.learning.flowershop.Entity;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -10,8 +10,8 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate orderCreateDate;
-    private LocalDate orderCompleteDate;
+    private LocalDateTime orderCreateDate;
+    private LocalDateTime orderCompleteDate;
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
     @ManyToMany
@@ -21,7 +21,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(LocalDate orderCreateDate, LocalDate orderCompleteDate, User user, List<Flower> flower) {
+    public Order(LocalDateTime orderCreateDate, LocalDateTime orderCompleteDate, User user, List<Flower> flower) {
         this.orderCreateDate = orderCreateDate;
         this.orderCompleteDate = orderCompleteDate;
         this.user = user;
@@ -36,19 +36,19 @@ public class Order {
         this.id = id;
     }
 
-    public LocalDate getOrderCreateDate() {
+    public LocalDateTime getOrderCreateDate() {
         return orderCreateDate;
     }
 
-    public void setOrderCreateDate(LocalDate orderCreateDate) {
+    public void setOrderCreateDate(LocalDateTime orderCreateDate) {
         this.orderCreateDate = orderCreateDate;
     }
 
-    public LocalDate getOrderCompleteDate() {
+    public LocalDateTime getOrderCompleteDate() {
         return orderCompleteDate;
     }
 
-    public void setOrderCompleteDate(LocalDate orderCompleteDate) {
+    public void setOrderCompleteDate(LocalDateTime orderCompleteDate) {
         this.orderCompleteDate = orderCompleteDate;
     }
 

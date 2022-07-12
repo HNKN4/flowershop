@@ -4,8 +4,8 @@ import com.learning.flowershop.Entity.User;
 import com.learning.flowershop.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -21,18 +21,15 @@ public class UserService {
         return user;
     }
 
+    @Transactional
     public void changeMoney(Long userId, Integer money) {
-        Optional<User> userOptional = userRepository.findById(userId);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            user.setMoney(money);
-            userRepository.save(user);
-        } else {
-            throw new RuntimeException("user not found");
-        }
+        userRepository.findById(userId).ifPresentOrElse(v -> {
+            v.setMoney(money);
+        }, () -> {throw new RuntimeException("user not found");});
     }
 
     public User saveUser(User user) {
+        user.setMoney(1000);
         return userRepository.save(user);
     }
 }
