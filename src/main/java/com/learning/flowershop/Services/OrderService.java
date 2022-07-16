@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -38,8 +39,10 @@ public class OrderService {
             sum += flower.getPrice();
         }
         order.setPrice(sum);
-        LocalDateTime now = LocalDateTime.now();
-        order.setOrderCreateDate(now);
+
+        LocalDateTime createOrder = LocalDateTime.now();
+        createOrder = createOrder.truncatedTo(ChronoUnit.SECONDS);
+        order.setOrderCreateDate(createOrder);
         orderRepository.save(order);
     }
 }
